@@ -37,7 +37,10 @@ node_modules/
 jspm_packages/
 
 # Production keys
-config/prod.js
+prod.js
+
+# Misc
+misc/
 
 # TypeScript v1 declaration files
 typings/
