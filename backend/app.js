@@ -6,6 +6,7 @@ amounts = require('./routes/amounts'),
 session = require('./routes/session'),
 bodyParser = require('body-parser'),
 mongoose = require('mongoose')
+routes = require('./routes/routes')
 
 if (process.env.DEV === 'true')
 	var config = require('./config/dev')
@@ -20,10 +21,11 @@ mongoose.connect(config.db_uri).then(function() {
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use('/api/user', user)
-app.use('/api/amount', amounts)
-app.use('/api/session', session)
-app.use('/', index)
+// app.use('/api/user', user)
+// app.use('/api/amount', amounts)
+// app.use('/api/session', session)
+// app.use('/', index)
+app.use('/api', routes)
 
 const PORT = process.env.PORT || 1337
 app.listen(PORT, () => {

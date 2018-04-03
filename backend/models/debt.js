@@ -10,7 +10,7 @@ const schema = new Schema({
 	timestamps: true
 })
 
-schema.statics.update = function(user1, user2, amount) {
+schema.statics.updateDebt = function(user1, user2, amount) {
 	return new Promise((resolve, reject) => {
 		this.findOneAndUpdate({_user1: user1, _user2: user2}, {$inc:{amount: amount}}, {upsert: true, new: true}, function(err, debt) {
 			if(err) console.error(err)
@@ -18,6 +18,18 @@ schema.statics.update = function(user1, user2, amount) {
 			resolve(debt)
 		})
 	}) 
+}
+
+schema.statics.findAll = function(userId, from = new Date(0), to = new Date()) {
+	return this.find({
+		$or: [{_user1: userId}, {_user2: userId}],
+		createdAt: {
+			$gte: from,
+			$lt: to
+		}
+	}, {
+		_user1: 1, _user2: 1, amount: 1, updatedAt: 1, _id: 0
+	})
 }
 
 const Debt = mongoose.model('debt', schema)
