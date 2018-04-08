@@ -17,6 +17,23 @@ db.users.insert(
 			"createdAt" : ISODate("2018-03-22T16:27:18.598Z"),
 			"updatedAt" : ISODate("2018-03-22T16:27:18.598Z"),
 			"__v" : 0
+		},
+		{
+			"_id" : ObjectId("5ab181d87285d574a7c640b8"),
+			"username" : "vårjakob",
+			"email" : "jakob@kul.tips",
+			"createdAt" : ISODate("2018-03-22T16:27:18.598Z"),
+			"updatedAt" : ISODate("2018-03-22T16:27:18.598Z"),
+			"removed": true,
+			"__v" : 0
+		},
+		{
+			"_id" : ObjectId("5ab181d87285d574a7c640b9"),
+			"username" : "erjaobk",
+			"createdAt" : ISODate("2018-03-22T16:27:18.598Z"),
+			"updatedAt" : ISODate("2018-03-22T16:27:18.598Z"),
+			"removed": false,
+			"__v" : 0
 		}
 	]
 )

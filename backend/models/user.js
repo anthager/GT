@@ -3,7 +3,6 @@ const Schema = mongoose.Schema
 
 const schema = new Schema({
 	username: {type: String, required: true, unique: true, index: true},
-	email: {type: String, required: true, unique: true, index: true},
 	removed: {type: Boolean},
 },{
 	timestamps: true
@@ -18,17 +17,21 @@ schema.statics.getName = function(id) {
 	return this.findById(id, {username: true})
 }
 
-schema.statics.DgetId = function(name) {
-	return new Promise((resolve, reject) => {
-		this.find({username: name}, {username: true, _id: true}).then(function(inUser){
-			console.log(inUser)
-			const [{_id, username}] = inUser
-			const user = {}
-			user[username] = _id
-			resolve(user)
-		}).catch(function(err){
-			console.error(err)
-		})
+schema.statics.getAllUsernames = function() {
+	return this.find({
+		'$or': [
+			{
+				removed: {
+					'$exists': false
+				}
+			},
+			{
+				removed: false
+			}
+		]
+	}, {
+		_id: false,
+		username: true,
 	})
 }
 

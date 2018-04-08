@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "DEV=true nodemon app.js",
+    "start": "node app.js",
+    "start-dev": "DEV=true nodemon app.js",
     "deploy": "",
     "test": "nyc mocha",
     "seed": "mongo localhost:27017/gursch scripts/seed.js"

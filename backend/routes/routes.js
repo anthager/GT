@@ -16,6 +16,17 @@ router.route('/user/add')
 	})
 })
 
+router.route('/users')
+.get((req, res) => {
+	userController.getAll()
+	.then((resp) => {
+		res.status(resp.code).json(resp.data)
+	})
+	.catch((err) => {
+		res.status(err.code).json(err.data)
+	})
+})
+
 router.route('/session/add')
 .post((req, res) => {
 	sessionController.add(req.body)
@@ -27,7 +38,7 @@ router.route('/session/add')
 	})
 })
 
-router.route('/debts/:username/:from/:to')
+router.route('/debts/:username/:from?/:to?')
 .get((req, res) => {
 	debtController.getDebtsForUser(
 		req.params.username, 
@@ -42,6 +53,11 @@ router.route('/debts/:username/:from/:to')
 	.catch((err) => {
 		res.status(err.code).json(err.message)
 	})
+})
+
+router.route('/')
+.get((req, res) => {
+	res.status(200).send('working bby')
 })
 
 module.exports = router

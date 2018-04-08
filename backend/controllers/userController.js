@@ -1,11 +1,19 @@
 const User = require('./../models/user')
 
-function add(username, email) {
+function add(username) {
 	return new Promise(function (resolve, reject) {
-		Promise.all([validateUsername(username), validateEmail(email)]).then(function (values) {
-			User.create({username: username, email: email}).then(function (user) {
+		validateUsername(username).then(function (values) {
+			User.create({
+				username: username
+			}).then(function (user) {
 				console.log(`${user.username} was saved to db`)
-				const deconUser = (({username, email, createdAt}) => ({username, email, createdAt}))(user)
+				const deconUser = (({
+					username,
+					createdAt
+				}) => ({
+					username,
+					createdAt
+				}))(user)
 				resolve({
 					data: deconUser,
 					code: 202,
@@ -30,6 +38,30 @@ function add(username, email) {
 	})
 }
 
+function getAll() {
+	return new Promise(function (resolve, reject) {
+		User.getAllUsernames().then((users) => {
+				console.log(users)
+				if (users.length == 0) {
+					var code = 204
+				} else {
+					var code = 200
+				}
+				resolve({
+					data: users,
+					code: code
+				})
+			})
+			.catch((err) => {
+				console.error(err)
+				reject({
+					data: null,
+					code: 500
+				})
+			})
+	})
+}
+
 function remove(username) {
 	new Promise(function (resolve, reject) {
 		User.findOneAndUpdate({
@@ -38,7 +70,7 @@ function remove(username) {
 			removed: true
 		}, function (err, user) {
 			if (err) console.error(err);
-			console.log(`${user.username} was marked as deleted`);
+			console.log(`${user.username} was marked as removed`);
 		})
 	})
 }
@@ -63,6 +95,7 @@ function validateEmail(email) {
 }
 
 module.exports = {
+	getAll: getAll,
 	remove: remove,
 	add: add
 }
