@@ -38,10 +38,16 @@ function add(username) {
 	})
 }
 
+function authUser(username) {
+	return new Promise(function(resolve, reject) {
+		User.find({username: username})
+	})
+}
+
 function getAll() {
 	return new Promise(function (resolve, reject) {
 		User.getAllUsernames().then((users) => {
-				console.log(users)
+				console.log(`fetched: \n ${users}`)
 				if (users.length == 0) {
 					var code = 204
 				} else {
@@ -91,6 +97,15 @@ function validateEmail(email) {
 			resolve(email)
 		else
 			reject("email is invalid")
+	})
+}
+
+function validateUsername(username) {
+	return new Promise(function (resolve, reject) {
+		if (!(username))
+			reject("username is invalid")
+		else
+			resolve(username)
 	})
 }
 
