@@ -39,32 +39,48 @@ function add(username) {
 }
 
 function authUser(username) {
-	return new Promise(function(resolve, reject) {
-		User.find({username: username})
+	return new Promise(function (resolve, reject) {
+		User.find({
+			username: username
+		}, {
+			username: true,
+			_id: false
+		}, (err, user) => {
+			if (err) reject({code: 500})
+			if (user.length == 0) {
+				console.log(`tried to auth ${username} but user is not registered`)
+				resolve({code: 404, message: `${username} doesnt exist`})
+			}
+			console.log(`authed ${username}`)
+			resolve({
+				message: `${user[0].username} is cool`,
+				code: 200
+			})
+		})
 	})
 }
 
 function getAll() {
 	return new Promise(function (resolve, reject) {
 		User.getAllUsernames().then((users) => {
-				console.log(`fetched: \n ${users}`)
-				if (users.length == 0) {
-					var code = 204
-				} else {
-					var code = 200
-				}
-				resolve({
-					data: users,
-					code: code
-				})
+			console.log(`fetched: \n ${users}`)
+			if (users.length == 0) {
+				var code = 204
+			} else {
+				var code = 200
+			}
+			resolve({
+				data: users,
+				code: code
 			})
-			.catch((err) => {
-				console.error(err)
-				reject({
-					data: null,
-					code: 500
-				})
+		})
+		.catch((err) => {
+			console.error(err)
+			reject({
+				data: null,
+				code: 500
 			})
+		})
 	})
 }
 
@@ -75,7 +91,7 @@ function remove(username) {
 		}, {
 			removed: true
 		}, function (err, user) {
-			if (err) console.error(err);
+			if (err) console.error(err)
 			console.log(`${user.username} was marked as removed`);
 		})
 	})
@@ -84,32 +100,33 @@ function remove(username) {
 function validateUsername(username) {
 	return new Promise(function (resolve, reject) {
 		if (username !== undefined)
-			resolve(username)
+		resolve(username)
 		else
-			reject('username is invalid')
+		reject('username is invalid')
 	})
-
+	
 }
 
 function validateEmail(email) {
 	return new Promise(function (resolve, reject) {
 		if (email !== undefined)
-			resolve(email)
+		resolve(email)
 		else
-			reject("email is invalid")
+		reject("email is invalid")
 	})
 }
 
 function validateUsername(username) {
 	return new Promise(function (resolve, reject) {
 		if (!(username))
-			reject("username is invalid")
+		reject("username is invalid")
 		else
-			resolve(username)
+		resolve(username)
 	})
 }
 
 module.exports = {
+	authUser: authUser,
 	getAll: getAll,
 	remove: remove,
 	add: add

@@ -38,6 +38,18 @@ router.route('/session/add')
 	})
 })
 
+router.route('/auth/:username')
+.get((req, res) => {
+	userController.authUser(req.params.username)
+	.then((resObj) => {
+			res.status(resObj.code).json(resObj.message)
+	})
+	.catch((errObj) => {
+		console.error(errObj.err)
+		res.status(500).json(':[')
+	})
+})
+
 router.route('/debts/:username/:from?/:to?')
 .get((req, res) => {
 	debtController.getDebtsForUser(
