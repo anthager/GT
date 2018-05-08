@@ -1,1 +1,0 @@
-tell application "Terminal" to close windows

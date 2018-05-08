@@ -69,7 +69,7 @@ router.route('/debts/:username/:from?/:to?')
 
 router.route('/')
 .get((req, res) => {
-	res.status(200).send('working bby')
+	res.status(200).send('Working bby! \nAvailable routes: \napi/:user \napi/:user \napi/session/add \napi/auth/:username \napi/debts/:username/:from?/:to? \n')
 })
 
 module.exports = router

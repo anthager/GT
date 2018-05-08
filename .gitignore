@@ -39,6 +39,7 @@ jspm_packages/
 
 # Production keys
 prod.js
+.vscode
 
 # Misc
 misc/
