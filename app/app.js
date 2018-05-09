@@ -4,13 +4,11 @@ bodyParser = require('body-parser'),
 mongoose = require('mongoose')
 routes = require('./routes/routes')
 
-if (process.env.DEV === 'true')
-	var config = require('./config/dev')
-else
-	var config = require('./config/prod')
+const db_uri = process.env.DB_URI || 'mongodb://localhost:27017/gursch'
+const startMessage = process.env.STARTMESSAGE || 'connected to mongodb in dev mode..'
 
-mongoose.connect(config.db_uri).then(function() {
-	console.log(config.startMessage)
+mongoose.connect(db_uri).then(function() {
+	console.log(startMessage)
 }).catch(function(err) {
 	console.log(err)
 })
