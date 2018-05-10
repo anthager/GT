@@ -5,14 +5,14 @@ available routes:
 `api/`
 to confirm that the api is workign
 
-`api/user`
-to get a user
+`api/user/add`
+to post a user
 
 `api/users`
 to get all users
 
-`/api/session/add`
-to add a user
+`api/session/add`
+to post a user
 
 `api/auth/:username`
 to check if a user with username exist
