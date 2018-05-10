@@ -10,6 +10,9 @@
     "test": "nyc mocha",
     "seed": "mongo localhost:27017/gursch scripts/seed.js"
   },
+  "engines": {
+    "node": "8.11.1"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
