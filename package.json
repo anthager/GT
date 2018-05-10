@@ -2,10 +2,10 @@
   "name": "gurschtracker-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "app/app.js",
   "scripts": {
-    "start": "node app.js",
-    "start-dev": "DEV=true nodemon app.js",
+    "start": "node app/app.js",
+    "start-dev": "DEV=true nodemon app/app.js",
     "deploy": "",
     "test": "nyc mocha",
     "seed": "mongo localhost:27017/gursch scripts/seed.js"

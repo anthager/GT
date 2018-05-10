@@ -7,6 +7,8 @@ routes = require('./routes/routes')
 const db_uri = process.env.DB_URI || 'mongodb://localhost:27017/gursch'
 const startMessage = process.env.STARTMESSAGE || 'connected to mongodb in dev mode..'
 
+console.log(db_uri + ' - ' + startMessage)
+
 mongoose.connect(db_uri).then(function() {
 	console.log(startMessage)
 }).catch(function(err) {
