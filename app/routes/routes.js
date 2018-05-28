@@ -63,12 +63,11 @@ router.route('/debts/:username/:from?/:to?').get((req, res) => {
 		})
 })
 
-router.route('/').get((req, res) => {
-	res
-		.status(200)
-		.send(
-			'Working bby! \nAvailable routes: \napi/:user \napi/:user \napi/session/add \napi/auth/:username \napi/debts/:username/:from?/:to? \n',
-		)
+router.route('/')
+.get((req, res) => {
+	// todo: make into middleware
+	console.log('request from ' + req.headers.origin)
+	res.status(200).send({"message":"Working bby! \nAvailable routes: \napi/:user \napi/:user \napi/session/add \napi/auth/:username \napi/debts/:username/:from?/:to? \n"})
 })
 
 module.exports = router

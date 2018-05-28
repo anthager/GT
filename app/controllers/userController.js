@@ -40,28 +40,30 @@ function add(username) {
 }
 
 function authUser(username) {
+	return User.find({
+		username: username
+	}, {
+		username: true,
+		_id: false
+	}).then((user) => {
+		if (user.length == 0) {
+			console.log(`tried to auth ${username} but user is not registered`)
+			return({code: 404, message: `${username} doesnt exist`})
+		} else {
+			console.log(`authed ${username}`)
+			return({
+				message: `${user[0].username} is cool`,
+				code: 200
+			})
+		}
+	})
+	.catch((err) => {
+		return {code: 500}
+	})
+}
+
+function getAmount(getTotal) {
 	return new Promise(function(resolve, reject) {
-		User.find(
-			{
-				username: username,
-			},
-			{
-				username: true,
-				_id: false,
-			},
-			(err, user) => {
-				if (err) reject({ code: 500 })
-				if (user.length == 0) {
-					console.log(`tried to auth ${username} but user is not registered`)
-					resolve({ code: 404, message: `${username} doesnt exist` })
-				}
-				console.log(`authed ${username}`)
-				resolve({
-					message: `${user[0].username} is cool`,
-					code: 200,
-				})
-			},
-		)
 	})
 }
 

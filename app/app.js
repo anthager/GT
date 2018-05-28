@@ -19,6 +19,8 @@ mongoose
 		console.log(err)
 	})
 
+app.use(cors());
+app.options('*', cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
