@@ -5,7 +5,7 @@ available routes:
 `api/`
 to confirm that the api is workign
 
-`api/user/add`
+`api/user`
 to post a user
 
 `api/users`
