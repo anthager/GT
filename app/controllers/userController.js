@@ -1,42 +1,39 @@
 const User = require('./../models/user')
 
 function add(username) {
-	return new Promise((resolve, reject) =>
-		validateUsername(username)
-			.then((values) =>
-				User.create({
-					username: username,
-				})
-					.then((user) => {
-						console.log(`${user.username} was saved to db`)
-						const deconUser = (({ username, createdAt }) => ({
-							username,
-							createdAt,
-						}))(user)
-						resolve({
-							data: deconUser,
-							code: 202,
-						})
-					})
-					.catch(function(err) {
-						console.error(err)
-						if (err.name == 'BulkWriteError') {
-							reject({
-								code: 409,
-								message: err.message,
-							})
-						} else {
-							reject({
-								message: 'declined cuz fuck you',
-								code: 400,
-							})
-						}
-					}),
-			)
-			.catch((err) => {
-				console.error(err)
-			}),
-	)
+	return validateUsername(username)
+	.then(function (values) {
+		return User.create({
+			username: username
+		})
+	})
+	.then(function (user) {
+		console.log(`${user.username} was saved to db`)
+		const deconUser = (({
+			username,
+			createdAt
+		}) => ({
+			username,
+			createdAt
+		}))(user)
+		return {
+			data: deconUser,
+			code: 202,
+		}
+	})
+	.catch(function (err) {
+		if (err.code === 11000) {
+			return {
+				code: 409,
+				message: 'err.message',
+			}
+		} else {
+			return {
+				code: 400,
+				message: 'declined cuz fuck you',
+			}
+		}
+	})
 }
 
 function authUser(username) {

@@ -7,7 +7,7 @@
     "start": "node app/app.js",
     "start-dev": "DEV=true nodemon app/app.js",
     "deploy": "",
-    "test": "nyc mocha --exit",
+    "test": "mongo localhost:27017/gursch-test scripts/seed-test.js && nyc mocha --exit",
     "seed": "mongo localhost:27017/gursch scripts/seed.js"
   },
   "engines": {

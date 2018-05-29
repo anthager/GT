@@ -4,16 +4,16 @@ const express = require('express'),
 sessionController = require('../controllers/sessionController')
 debtController = require('../controllers/debtController')
 
-router.route('/user/add').post((req, res) => {
-	const { username, email } = req.body
-	userController
-		.add(username, email)
-		.then(({ data, code }) => {
-			res.status(code).json(data)
-		})
-		.catch(({ code, message }) => {
-			res.status(code).json(message)
-		})
+router.route('/user')
+.post((req, res) => {
+	const {username, email} = req.body
+	userController.add(username, email)
+	.then(({data, code}) => {
+		res.status(code).json(data)
+	})
+	.catch(({code, message}) => {
+		res.status(code).json(message)
+	})
 })
 
 router.route('/users').get((req, res) => {
@@ -27,15 +27,15 @@ router.route('/users').get((req, res) => {
 		})
 })
 
-router.route('/session/add').post((req, res) => {
-	sessionController
-		.add(req.body)
-		.then(({ message, code }) => {
-			res.status(code).json(message)
-		})
-		.catch(({ code, message }) => {
-			res.status(code).json(message)
-		})
+router.route('/session')
+.post((req, res) => {
+	sessionController.add(req.body)
+	.then(({message, code}) => {
+		res.status(code).json(message)
+	})
+	.catch(({code, message}) => {
+		res.status(code).json(message)
+	})
 })
 
 router.route('/auth/:username').get((req, res) => {
