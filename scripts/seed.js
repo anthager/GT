@@ -44,6 +44,7 @@ db.sessions.drop()
 db.createCollection('sessions')
 db.sessions.insert(
 	[
+		// anthage and simkarr
 		{
 			"_id" : ObjectId("5b0c979d2483f5341db66d5c"),
 			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
@@ -70,7 +71,63 @@ db.sessions.insert(
 			"createdAt" : ISODate("2018-05-28T23:58:21.879Z"),
 			"updatedAt" : ISODate("2018-05-28T23:58:21.879Z"),
 			"__v" : 0
-		}
+		},
+		// anthage and vårjakob
+		{
+			"_id" : ObjectId("5b0c979d2483f5341db66d5c"),
+			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
+			"_user2" : ObjectId("5ab181d87285d574a7c640b8"),
+			"amount" : -12,
+			"createdAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"updatedAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"__v" : 0
+		},
+		{
+			"_id" : ObjectId("5b0c979d2483f5341db66d5c"),
+			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
+			"_user2" : ObjectId("5ab181d87285d574a7c640b8"),
+			"amount" : -12,
+			"createdAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"updatedAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"__v" : 0
+		},
+		{
+			"_id" : ObjectId("5b0c979d2483f5341db66d5c"),
+			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
+			"_user2" : ObjectId("5ab181d87285d574a7c640b8"),
+			"amount" : 12,
+			"createdAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"updatedAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"__v" : 0
+		},
+		// anthage and erjakob
+		{
+			"_id" : ObjectId("5b0c979d2483f5341db66d5c"),
+			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
+			"_user2" : ObjectId("5ab181d87285d574a7c640b9"),
+			"amount" : -12,
+			"createdAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"updatedAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"__v" : 0
+		},
+		{
+			"_id" : ObjectId("5b0c979d2483f5341db66d5c"),
+			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
+			"_user2" : ObjectId("5ab181d87285d574a7c640b9"),
+			"amount" : -12,
+			"createdAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"updatedAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"__v" : 0
+		},
+		{
+			"_id" : ObjectId("5b0c979d2483f5341db66d5c"),
+			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
+			"_user2" : ObjectId("5ab181d87285d574a7c640b9"),
+			"amount" : 12,
+			"createdAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"updatedAt" : ISODate("2018-05-28T23:58:21.879Z"),
+			"__v" : 0
+		},
 	]
 )
 
@@ -86,6 +143,24 @@ db.debts.insert(
 			"amount" : -24,
 			"createdAt" : ISODate("2018-05-29T12:16:25.824Z"),
 			"updatedAt" : ISODate("2018-05-29T12:16:25.824Z")
-		}
+		},
+		{
+			"_id" : ObjectId("5b0d4499e8b1e40d9e8dd9ef"),
+			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
+			"_user2" : ObjectId("5ab181d87285d574a7c640b8"),
+			"__v" : 0,
+			"amount" : -24,
+			"createdAt" : ISODate("2018-05-29T12:16:25.824Z"),
+			"updatedAt" : ISODate("2018-05-29T12:16:25.824Z")
+		},
+		{
+			"_id" : ObjectId("5b0d4499e8b1e40d9e8dd9ef"),
+			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
+			"_user2" : ObjectId("5ab181d87285d574a7c640b8"),
+			"__v" : 0,
+			"amount" : -24,
+			"createdAt" : ISODate("2018-05-29T12:16:25.824Z"),
+			"updatedAt" : ISODate("2018-05-29T12:16:25.824Z")
+		},
 	]
 )
