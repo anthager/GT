@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const app = express()
 const routes = require('../app/routes/routes')
 const bodyParser = require('body-parser')
+const User = require('../app/models/user')
 
 const db_uri = 'mongodb://localhost:27017/gursch-test'
 p = mongoose.connect(db_uri)
@@ -35,6 +36,14 @@ describe ('test adding users', function () {
 			request(app)
 			.post('/user')
 			.send({username: 'kalle', email: 'kalle@gnail.com'})
+			.expect(202, done)
+		})
+	})
+	it ('should add karin', function(done) {
+		p.then(function() {
+			request(app)
+			.post('/user')
+			.send({username: 'karin', email: 'karin@gnail.com'})
 			.expect(202, done)
 		})
 	})
@@ -92,6 +101,36 @@ describe ('test authing', function () {
 	})
 })
 
+describe ('test user functions', function () {
+	this.timeout(5000);
+	it ('should get formated users', function(done) {
+		p.then(function() {
+			var username1 = 'kalle'
+			var username2 = 'pelle'
+			return User.getFormatedUsers(username1, username2)
+		})
+		.then((users) => {
+			const {_id : user1id} = users[0]
+			const {_id : user2id} = users[1]
+			expect(user1id.toString().localeCompare(user2id.toString(), 'se-SE')).to.be.lessThan(0)
+			done()
+		})
+	})
+	it ('should get formated users', function(done) {
+		p.then(function() {
+			var username1 = 'kalle'
+			var username2 = 'pelle'
+			return User.getFormatedUsers(username2, username1)
+		})
+		.then((users) => {
+			const {_id : user1id} = users[0]
+			const {_id : user2id} = users[1]
+			expect(user1id.toString().localeCompare(user2id.toString(), 'se-SE')).to.be.lessThan(0)
+			done()
+		})
+	})
+})
+
 describe ('test sessions', function () {
 	this.timeout(5000);
 	it ('should add session between kalle and pelle', function(done) {
@@ -122,6 +161,20 @@ describe ('test sessions', function () {
 			.expect(200, done)
 		})
 	})
+	it ('should add session between kalle and karin', function(done) {
+		p.then(function() {
+			var username1 = 'kalle'
+			var username2 = 'karin'
+			request(app)
+			.post('/session')
+			.send({
+				sender: username2,
+				opponent: username1,
+				amount: -20
+			})
+			.expect(200, done)
+		})
+	})
 })
 
 describe ('test debts', function () {
@@ -137,6 +190,11 @@ describe ('test debts', function () {
 						user1: 'kalle',
 						user2: 'pelle',
 						amount: 40,
+					},
+					{
+						user1: 'kalle',
+						user2: 'karin',
+						amount: 20,
 					}
 				],
 				message: ':]'

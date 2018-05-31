@@ -1,29 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const schema = new Schema(
-	{
-		_user1: {
-			type: Schema.ObjectId,
-			ref: 'user',
-			required: true,
-			index: true,
-			unique: true,
-		},
-		_user2: {
-			type: Schema.ObjectId,
-			ref: 'user',
-			required: true,
-			index: true,
-			unique: true,
-		},
-		// amount is to from user1s perspective
-		amount: { type: Number, required: true },
-	},
-	{
-		timestamps: true,
-	}
-)
+const schema = new Schema({
+	_user1: {type: Schema.ObjectId, ref: 'user', required: true},
+	_user2: {type: Schema.ObjectId, ref: 'user', required: true},
+	// amount is to from user1s perspective 
+	amount: {type: Number, required: true},
+}, {
+	timestamps: true
+})
+schema.index({_user1: 1, _user2: 1}, {unique: true})
 
 schema.statics.updateDebt = function(user1, user2, amount) {
 	return new Promise((resolve, reject) => {
