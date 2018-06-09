@@ -83,7 +83,7 @@ db.sessions.insert(
 			"__v" : 0
 		},
 		{
-			"_id" : ObjectId("5b0c979d2483f5341db66d5r"),
+			"_id" : ObjectId("5b0c979d2483f5341db66d51"),
 			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
 			"_user2" : ObjectId("5ab181d87285d574a7c640b8"),
 			"amount" : -12,
@@ -92,7 +92,7 @@ db.sessions.insert(
 			"__v" : 0
 		},
 		{
-			"_id" : ObjectId("5b0c979d2483f5341db66d5t"),
+			"_id" : ObjectId("5b0c979d2483f5341db66d52"),
 			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
 			"_user2" : ObjectId("5ab181d87285d574a7c640b8"),
 			"amount" : 12,
@@ -102,7 +102,7 @@ db.sessions.insert(
 		},
 		// anthage and erjakob
 		{
-			"_id" : ObjectId("5b0c979d2483f5341db66d5y"),
+			"_id" : ObjectId("5b0c979d2483f5341db66d53"),
 			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
 			"_user2" : ObjectId("5ab181d87285d574a7c640b9"),
 			"amount" : -12,
@@ -111,7 +111,7 @@ db.sessions.insert(
 			"__v" : 0
 		},
 		{
-			"_id" : ObjectId("5b0c979d2483f5341db66d5u"),
+			"_id" : ObjectId("5b0c979d2483f5341db66d54"),
 			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
 			"_user2" : ObjectId("5ab181d87285d574a7c640b9"),
 			"amount" : -12,
@@ -120,7 +120,7 @@ db.sessions.insert(
 			"__v" : 0
 		},
 		{
-			"_id" : ObjectId("5b0c979d2483f5341db66d5g"),
+			"_id" : ObjectId("5b0c979d2483f5341db66d55"),
 			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
 			"_user2" : ObjectId("5ab181d87285d574a7c640b9"),
 			"amount" : 12,
@@ -145,7 +145,7 @@ db.debts.insert(
 			"updatedAt" : ISODate("2018-05-29T12:16:25.824Z")
 		},
 		{
-			"_id" : ObjectId("5b0d4499e8b1e40d9e8dd9eg"),
+			"_id" : ObjectId("5b0d4499e8b1e40d9e8dd9e1"),
 			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
 			"_user2" : ObjectId("5ab181d87285d574a7c640b8"),
 			"__v" : 0,
@@ -154,7 +154,7 @@ db.debts.insert(
 			"updatedAt" : ISODate("2018-05-29T12:16:25.824Z")
 		},
 		{
-			"_id" : ObjectId("5b0d4499e8b1e40d9e8dd9ej"),
+			"_id" : ObjectId("5b0d4499e8b1e40d9e8dd9e2"),
 			"_user1" : ObjectId("5ab181d87285d574a7c640b6"),
 			"_user2" : ObjectId("5ab181d87285d574a7c640b9"),
 			"__v" : 0,
