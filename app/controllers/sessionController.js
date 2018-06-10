@@ -15,12 +15,13 @@ function add({
 		return Promise.all([Session.add(users[0], users[1], amount), Debt.updateDebt(users[0], users[1], amount)])
 	})
 	.then((values) => {
+		console.log(`${sender} and ${opponent} is now ${values[1].amount}`) 
+		console.log(`session between ${sender} and ${opponent} for ${amount} saved`)
 		return {
 			code: 200,
 			message : {
-				success: true, 
-				sessionInfo: `session between ${sender} and ${opponent} for ${amount} saved`, 
-				debtInfo: `${sender} and ${opponent} is now ${values[1].amount}`
+				opponent: opponent,
+				amount: values[1].amount,
 			}
 		}
 	})
