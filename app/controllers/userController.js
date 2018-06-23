@@ -47,9 +47,9 @@ function authUser(username) {
 			console.log(`tried to auth ${username} but user is not registered`)
 			return({code: 404, message: `${username} doesnt exist`})
 		} else {
-			console.log(`authed ${username}`)
+			console.log(`authed ${user}`)
 			return({
-				message: `${user[0].username} is cool`,
+				user: user,
 				code: 200
 			})
 		}

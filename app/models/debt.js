@@ -13,17 +13,15 @@ schema.index({_user1: 1, _user2: 1}, {unique: true})
 
 schema.statics.updateDebt = function(user1, user2, amount) {
 	return new Promise((resolve, reject) => {
-		this.findOneAndUpdate(
-			{ _user1: user1, _user2: user2 },
-			{ $inc: { amount: amount } },
-			{ upsert: true, new: true },
-			function(err, debt) {
-				if (err) console.error(err)
-				console.log(`${user1.username} and ${user2.username} is now ${debt.amount}`)
-				resolve(debt)
-			},
-		)
-	})
+		if (!amount) {
+			throw 'bad input'
+		}
+		this.findOneAndUpdate({_user1: user1, _user2: user2}, {$inc:{amount: amount}}, {upsert: true, new: true}, function(err, debt) {
+			if(err) console.error(err)
+			console.log(`${user1.username} and ${user2.username} is now ${debt.amount}`)
+			resolve(debt)
+		})
+	}) 
 }
 
 schema.statics.findAll = function(userId, from = new Date(0), to = new Date()) {
