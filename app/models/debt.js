@@ -16,7 +16,7 @@ schema.statics.updateDebt = function(user1, user2, amount) {
 		if (!amount) {
 			throw 'bad input'
 		}
-		this.findOneAndUpdate({_user1: user1, _user2: user2}, {$inc:{amount: amount}}, {upsert: true, new: true}, function(err, debt) {
+		this.findOneAndUpdate({_user1: user1, _user2: user2}, {$inc:{amount: amount}}, {upsert: true, new: true}, (err, debt) => {
 			if(err) {
 				console.error(err)
 				reject(err)
