@@ -53,6 +53,7 @@ schema.statics.getFormatedUsers = function(username1, username2) {
 			})
 
 			.catch((err) => {
+				console.error(err)
 				reject({ code: 500, message: ':(' })
 			})
 	})
@@ -65,6 +66,7 @@ function sortUsers(user1, user2) {
 	} else if (comp > 0) {
 		var sorted = [user2, user1]
 	} else {
+		//cant access error here 
 		res.status(406).json({ data: 'bad ids' })
 	}
 	return sorted

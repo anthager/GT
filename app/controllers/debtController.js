@@ -14,27 +14,25 @@ function getDebtsForUser(username, from, to) {
 		to = new Date(to)
 	}
 	return User.getId(username)
-	.then((id) => {
-		if (!id) throw new Error({code: 204, message: 'no user with that username'})
-		return Debt.findAll(id)
-	})
-	.then((debts) => {
-		if (!debts.length) throw new Error({code: 204, message: 'no debts found for user'})
-		const nameQueries = []
-		debts.forEach((debt) => {
-			nameQueries.push(formateDebt(debt._user1, debt._user2, debt.amount))
+		.then((id) => {
+			if (!id) throw new Error({ code: 204, message: 'no user with that username' })
+			return Debt.findAll(id)
 		})
-		return Promise.all(nameQueries)
-	})
-	.then((debts) => {
-		console.log(debts)
-		return{
-			data: debts,
-			message: ':]',
-			code: 200,
-		}
-	})
-	
+		.then((debts) => {
+			if (!debts.length) throw new Error({ code: 204, message: 'no debts found for user' })
+			const nameQueries = []
+			debts.forEach((debt) => {
+				nameQueries.push(formateDebt(debt._user1, debt._user2, debt.amount))
+			})
+			return Promise.all(nameQueries)
+		})
+		.then((debts) => {
+			console.log(debts)
+			return {
+				data: debts,
+				code: 200,
+			}
+		})
 }
 // function getDebtsForUser(username, from, to) {
 // 	username = validator.toString(validator.escape(username))
