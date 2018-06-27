@@ -41,10 +41,13 @@ schema.statics.getAllUsernames = function() {
 }
 
 schema.statics.getFormatedUsers = function(username1, username2) {
+	console.log(username1)
+	console.log(username2)
 	return new Promise(function(resolve, reject) {
 		Promise.all([User.getId(username1), User.getId(username2)])
 			.then((inUsers) => {
 				let [[user1], [user2]] = inUsers
+				console.log(inUsers)
 				if (!(user1 && user2)) reject({ code: 404, message: 'invalid user(s)' })
 
 				const users = sortUsers(user1, user2)
@@ -60,6 +63,8 @@ schema.statics.getFormatedUsers = function(username1, username2) {
 }
 
 function sortUsers(user1, user2) {
+	console.log(user1)
+	console.log(user2)
 	const comp = user1._id.toString().localeCompare(user2._id.toString(), 'se-SE')
 	if (comp < 0) {
 		var sorted = [user1, user2]

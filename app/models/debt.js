@@ -9,7 +9,7 @@ const schema = new Schema({
 }, {
 	timestamps: true
 })
-schema.index({_user1: 1, _user2: 1}, {unique: true})
+// schema.index({_user1: 1, _user2: 1}, {unique: true})
 
 schema.statics.updateDebt = function(user1, user2, amount) {
 	return new Promise((resolve, reject) => {
@@ -17,7 +17,11 @@ schema.statics.updateDebt = function(user1, user2, amount) {
 			throw 'bad input'
 		}
 		this.findOneAndUpdate({_user1: user1, _user2: user2}, {$inc:{amount: amount}}, {upsert: true, new: true}, function(err, debt) {
-			if(err) console.error(err)
+			if(err) {
+				console.error(err)
+				reject(err)
+			}
+			console.log('logginbby')
 			console.log(`${user1.username} and ${user2.username} is now ${debt.amount}`)
 			resolve(debt)
 		})
