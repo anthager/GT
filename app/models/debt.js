@@ -9,7 +9,7 @@ const schema = new Schema({
 }, {
 	timestamps: true
 })
-// schema.index({_user1: 1, _user2: 1}, {unique: true})
+schema.index({_user1: 1, _user2: 1}, {unique: true})
 
 schema.statics.updateDebt = function(user1, user2, amount) {
 	return new Promise((resolve, reject) => {
