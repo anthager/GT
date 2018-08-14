@@ -43,6 +43,7 @@ prod.js
 *.list
 dist/
 secrets.ts
+debug.log
 
 # Misc
 misc/
