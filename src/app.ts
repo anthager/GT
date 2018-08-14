@@ -1,8 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import logger from './utils/logger'
+import { logger } from './utils/logger'
 import { router } from './routes'
+import { Player } from './models/interfaces';
 
 export const app = express()
 

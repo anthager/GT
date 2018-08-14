@@ -1,5 +1,6 @@
 export const dbName = getDBName()
 export const dbUser = getDBUser()
+export const secretKey = process.env.SECRETKEY || 'secretKey'
 
 function getDBName(): string {
 	switch (process.env.NODE_ENV) {

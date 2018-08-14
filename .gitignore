@@ -42,6 +42,7 @@ prod.js
 .vscode
 *.list
 dist/
+secrets.ts
 
 # Misc
 misc/

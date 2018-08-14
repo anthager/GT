@@ -10,7 +10,9 @@ export const before = async () => {
 	await client.query(
 		'create table game (Winner integer not null, Loser integer not null, Amount integer not null, id serial, foreign key (Winner) references player(id) on delete cascade, foreign key (Loser) references player(id) on delete cascade, primary key (id), UNIQUE (id))',
 	)
-	await client.query("insert into player values ('anthager','asdfahgjfuy865')")
+	await client.query(
+		"insert into player values ('anthager','$2b$10$qv6ToOjFiof55QB.OZI8puWHs1lSdo4ZhKuenRAr3.iAvfLi74IMm')",
+	)
 	await client.end()
 }
 

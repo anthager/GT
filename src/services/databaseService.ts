@@ -10,9 +10,9 @@ export async function addPlayer(player: Player): Promise<any> {
 	return res
 }
 
-export async function getPlayer(player: Player): Promise<Player> {
+export async function getPlayer(name: string): Promise<Player> {
 	const client = await getConnection()
-	const res = (await client.query(queries.getPlayerWithName, [player.name])).rows[0]
+	const res = (await client.query(queries.getPlayerWithName, [name])).rows[0]
 	client.end()
 	return res
 }
