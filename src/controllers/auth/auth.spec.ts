@@ -4,8 +4,7 @@ import { expect } from 'chai'
 import 'chai-http'
 import { app } from '../../app'
 import * as testUtils from '../../utils/testUtils'
-import { Player } from '../../models/interfaces';
-
+import { Player } from '../../models/interfaces'
 
 declare global {
 	namespace Express {
@@ -91,10 +90,26 @@ describe('should reg a new player', () => {
 		const player = { name: 'Petter', password: 'password' }
 		newchai
 			.request(app)
-			.get('/api/auth/login?id=12')
+			.post('/api/auth/login')
+			.send(player)
 			.end((err, res) => {
 				expect(res.status).to.equal(200)
 				expect(res.body).to.be.a('string')
+				expect(res.body).to.be.not.empty
+				done()
+			})
+	})
+	it('should log in a player due to wrong password', (done) => {
+		const player = { name: 'Petter', password: 'passworaa' }
+		newchai
+			.request(app)
+			.post('/api/auth/login')
+			.send(player)
+			.end((err, res) => {
+				expect(res.status).to.equal(400)
+				expect(res.body).to.be.a('string')
+				expect(res.body).to.be.not.empty
+				expect(res.body).to.be.equal('wrong username or password')
 				done()
 			})
 	})

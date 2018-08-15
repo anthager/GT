@@ -10,7 +10,7 @@
 		"deploy": "",
 		"build-ts": "tsc",
 		"watch-ts": "tsc -w",
-		"test": "nyc ts-mocha \"src/**/*.spec.ts\"",
+		"test": "ts-mocha \"src/**/*.spec.ts\"",
 		"seed": "psql -U antonhagermalm -d gursch -f ./scripts/createDB.sql",
 		"serve-debug": "nodemon --inspect dist/app.js",
 		"serve": "npm run build && node dist/app.js"
