@@ -3,7 +3,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import { logger } from './utils/logger'
 import { router } from './routes'
-import { Player } from './models/interfaces';
+import { Player } from './models/interfaces'
 
 export const app = express()
 
@@ -14,16 +14,16 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api', router)
 
-const PORT = process.env.PORT || 1337
+const PORT = 1337
 // for testin
-if (!module.parent) {
+if (process.env.NODE_ENV !== 'test') {
 	app.listen(PORT, () => {
 		if (process.env.NODE_ENV !== 'test') {
 			logger.log({
-				level: 'debug',
+				level: 'info',
 				message: `started in ${
 					process.env.NODE_ENV === 'production' ? 'production' : 'development'
-				} mode`,
+				} mode at ${PORT}`,
 			})
 		}
 	})
