@@ -1,3 +1,4 @@
+import { validateRegisterInput, validateLoginInput } from '../../middleware/validateRequest'
 import { Player } from '../../models/interfaces'
 import { hash, compare } from 'bcrypt'
 import { Router, Request, Response } from 'express'
@@ -6,9 +7,9 @@ import { sign } from 'jsonwebtoken'
 import { secretKey } from '../../config'
 import { logger } from '../../utils/logger'
 
-const saltRounds = 10
+export const router = Router()
 
-export async function register(req: Request, res: Response) {
+router.post('/register', ...validateRegisterInput, async (req: Request, res: Response) => {
 	let player: Player = req.player
 	player.password = await hash(player.password, saltRounds)
 	try {
@@ -20,7 +21,6 @@ export async function register(req: Request, res: Response) {
 				logger.log({ level: 'error', message: `failed to generate token for ${player.name}` })
 				res.status(500).json()
 			}
-			console.log(token)
 			res.status(200).json(token)
 		})
 	} catch (err) {
@@ -29,18 +29,20 @@ export async function register(req: Request, res: Response) {
 				res.status(500).json('fail')
 				break
 			}
+			case '23505': {
+				res.status(400).json('username is used')
+				break
+			}
 			default: {
 				res.status(400).json('fail')
 				break
 			}
 		}
 	}
-}
-
-export async function login(req: Request, res: Response) {
-	const requestPassword = req.player.password
+})
+router.post('/login', ...validateLoginInput, async (req: Request, res: Response) => {
 	let player = await getPlayer(req.player.name)
-	if (await compare(requestPassword, player.password)) {
+	if (await compare(req.player.password, player.password)) {
 		delete player.password
 		sign({ player: player }, secretKey, (err: Error, token: string) => {
 			if (err) {
@@ -52,7 +54,9 @@ export async function login(req: Request, res: Response) {
 	} else {
 		res.status(400).json('wrong username or password')
 	}
-}
+})
+
+const saltRounds = 10
 
 export function isPlayer(player: Player | null): player is Player {
 	return truthy((<Player>player).name) && truthy((<Player>player).password)

@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import { checkSchema, validationResult, ValidationParamSchema } from 'express-validator/check'
 import { Player } from '../models/interfaces'
-import { RequestHandlerParams } from '../../node_modules/@types/express-serve-static-core';
-import { Location } from '../../node_modules/express-validator/check/location';
+import { RequestHandlerParams } from '../../node_modules/@types/express-serve-static-core'
+import { Location } from '../../node_modules/express-validator/check/location'
 
 const schema: Record<string, ValidationParamSchema> = {
 	name: {
@@ -26,12 +26,6 @@ const schema: Record<string, ValidationParamSchema> = {
 			options: { min: 7 },
 		},
 	},
-}
-
-const changeLocationOfParams = (location: Location) => {
-	schema.name.in = location
-	schema.password.in = location
-	return schema
 }
 
 export const validateRegisterInput: RequestHandlerParams[] = [
