@@ -8,6 +8,7 @@ import { secretKey } from '../../config'
 import { logger } from '../../utils/logger'
 
 export const router = Router()
+const saltRounds = 10
 
 router.post('/register', ...validateRegisterInput, async (req: Request, res: Response) => {
 	let player: Player = req.player
@@ -55,16 +56,3 @@ router.post('/login', ...validateLoginInput, async (req: Request, res: Response)
 		res.status(400).json('wrong username or password')
 	}
 })
-
-const saltRounds = 10
-
-export function isPlayer(player: Player | null): player is Player {
-	return truthy((<Player>player).name) && truthy((<Player>player).password)
-}
-
-function truthy(s: string): boolean {
-	if (s && typeof s === 'string' && s.length) {
-		return true
-	}
-	return false
-}

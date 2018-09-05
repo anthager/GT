@@ -25,3 +25,10 @@ export async function getConnection(): Promise<Client> {
 	await client.connect()
 	return client
 }
+
+export async function getAllPlayersExcept(id: number): Promise<Player[]> {
+	const client = await getConnection()
+	const players: Player[] = (await client.query(queries.getAllPlayersExcept, [id])).rows
+	client.end()
+	return players
+}

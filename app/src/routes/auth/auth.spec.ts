@@ -16,11 +16,11 @@ declare global {
 
 const newchai = chai.use(require('chai-http'))
 
-describe('should reg a new player', () => {
+describe('testing auth', () => {
 	before(testUtils.before)
 	after(testUtils.after)
 	it('should register a player', done => {
-		const player = { name: 'Petter', password: 'password', uid: 13415 }
+		const player = { name: 'Petter', password: 'password', id: 13415 }
 		newchai
 			.request(app)
 			.post('/auth/register')
@@ -115,7 +115,7 @@ describe('should reg a new player', () => {
 			})
 	})
 	it('should register Karl and send a request to a restricted endpoint', async () => {
-		const player = { name: 'Karl', password: 'password', uid: 13418 }
+		const player = { name: 'Karl', password: 'password', id: 13418 }
 		const token = await newchai
 			.request(app)
 			.post('/auth/register')

@@ -24,3 +24,7 @@ FROM (
     WHERE p.username = 'anthager'
 ) AS anthager, game AS g
 WHERE anthager.id = g.loser
+
+SELECT name, id
+FROM player
+WHERE is_deleted = false AND NOT player.id = 2 

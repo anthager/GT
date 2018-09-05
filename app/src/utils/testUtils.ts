@@ -13,6 +13,12 @@ export const before = async () => {
 	await client.query(
 		"insert into player values ('anthager','$2b$10$qv6ToOjFiof55QB.OZI8puWHs1lSdo4ZhKuenRAr3.iAvfLi74IMm')",
 	)
+	await client.query(
+		"insert into player values ('Nicke_test','$2b$10$qv6ToOjFiof55QB.OZI8puWHs1lSdo4ZhKuenRAr3.iAvfLi74IMm')",
+	)
+	await client.query(
+		"insert into player values ('Nina_test','$2b$10$qv6ToOjFiof55QB.OZI8puWHs1lSdo4ZhKuenRAr3.iAvfLi74IMm')",
+	)
 	await client.end()
 }
 

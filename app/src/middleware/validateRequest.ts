@@ -35,7 +35,7 @@ export const validateRegisterInput: RequestHandlerParams[] = [
 		if (!errors.isEmpty()) {
 			return res.status(400).json(errors.array())
 		}
-		req.player = { name: req.body.name, password: req.body.password, uid: -1 }
+		req.player = { name: req.body.name, password: req.body.password, id: -1 }
 		next()
 	},
 ]
@@ -47,7 +47,7 @@ export const validateLoginInput: RequestHandlerParams[] = [
 		if (!errors.isEmpty()) {
 			return res.status(400).json(errors.array())
 		}
-		req.player = { name: req.body.name, password: req.body.password, uid: -1 }
+		req.player = { name: req.body.name, password: req.body.password, id: -1 }
 		next()
 	},
 ]
