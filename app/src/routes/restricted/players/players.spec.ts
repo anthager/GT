@@ -41,7 +41,7 @@ describe('testing the fetching of all players', () => {
 				expect(res.body).to.be.an('array').that.is.not.empty
 				expect(res.body).to.be.an('array')
 				expect(res.body).that.that.deep.include({ name: 'Nicke_test', id: 2 })
-				// anthager is the default set player with the "InsaneHackerToken" token
+				// anthager is the default player with the "InsaneHackerToken" token
 				expect(res.body).that.that.not.deep.include({ name: 'anthager', id: 1 })
 			})
 	})

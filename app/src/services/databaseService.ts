@@ -1,4 +1,4 @@
-import { Player } from '../models/interfaces'
+import { Player, Opponent } from '../models/interfaces'
 import { Client } from 'pg'
 import { dbName, dbUser } from '../config'
 import * as queries from './queries'
@@ -42,4 +42,23 @@ export async function addGameToDB(
 	const client = await getConnection()
 	await client.query(queries.addGame, [winner.id, loser.id, submitter.id, amount])
 	client.end()
+}
+
+export async function getAllOpponents(player: Player): Promise<Opponent[]> {
+	const client = await getConnection()
+	const res: { name: string; id: number; amount: number }[] = (await client.query(
+		queries.getOpponents,
+		[player.id],
+	)).rows
+	const opponents: Opponent[] = res.map(_res => {
+		return { player: { name: _res.name, id: _res.id }, amount: Number(_res.amount) || 0 }
+	})
+	client.end()
+	return opponents
+}
+export async function getTotalSum(player: Player): Promise<number> {
+	const client = await getConnection()
+	const res = Number((await client.query(queries.getTotalSum, [player.id])).rows[0].sum || 0)
+	client.end()
+	return res
 }

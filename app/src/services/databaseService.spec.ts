@@ -7,8 +7,11 @@ import {
 	getPlayer,
 	addPlayer,
 	getAllPlayersExcept,
+	getAllOpponents,
+	getTotalSum,
 } from '../services/databaseService'
 import * as testUtils from '../utils/testUtils'
+import { Player } from '../models/interfaces'
 
 describe('testing the databse', async () => {
 	before(testUtils.before)
@@ -41,5 +44,21 @@ describe('testing the databse', async () => {
 		expect(res[0])
 			.to.be.an('object')
 			.that.have.all.keys('name', 'id')
+	})
+	it('should get all opponents for a player', async () => {
+		const player: Player = { name: 'Nicke_test', password: 'nej134', id: 2 }
+		const res = await getAllOpponents(player)
+		expect(res).to.be.an('array').that.is.not.empty
+		expect(res[0])
+			.to.be.an('object')
+			.that.have.all.keys('player', 'amount')
+		expect(res[0]).to.deep.equal({ player: { name: 'anthager', id: 1 }, amount: 54 })
+	})
+	it('should get the total sum for a player', async () => {
+		const player: Player = { name: 'Nicke_test', password: 'nej134', id: 2 }
+		const res = await getTotalSum(player)
+		expect(res)
+			.to.be.a('number')
+			.that.is.eql(54)
 	})
 })

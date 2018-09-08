@@ -49,6 +49,15 @@ export const before = async () => {
 	await client.query(
 		"insert into player values ('Petter_test','$2b$10$qv6ToOjFiof55QB.OZI8puWHs1lSdo4ZhKuenRAr3.iAvfLi74IMm')",
 	)
+	await client.query('insert into game values (1, 2, 1, 19)')
+	await client.query('insert into game values (1, 2, 1, 19)')
+	await client.query('insert into game values (1, 2, 1, 19)')
+	await client.query('insert into game values (1, 2, 1, 19)')
+	await client.query('insert into game values (2, 1, 2, 26)')
+	await client.query('insert into game values (2, 1, 2, 26)')
+	await client.query('insert into game values (2, 1, 2, 26)')
+	await client.query('insert into game values (2, 1, 2, 26)')
+	await client.query('insert into game values (2, 1, 2, 26)')
 	await client.end()
 }
 

@@ -10,6 +10,10 @@ export interface Game {
 	player2: Player
 }
 
+export interface Opponent {
+	player: Partial<Player>
+	amount: number
+}
 export interface Requirement {
 	name: string
 	type: string
