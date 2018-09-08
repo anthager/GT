@@ -135,4 +135,16 @@ describe('testing auth', () => {
 				expect(res.status).to.equal(200)
 			})
 	})
+	it('should fail to auth with bad token', async () => {
+		const token = 'badtoken'
+		await newchai
+			.request(app)
+			.get('/restricted/players')
+			.set({
+				authorization: `Bearer ${token}`,
+			})
+			.then(res => {
+				expect(res.status).to.equal(401)
+			})
+	})
 })

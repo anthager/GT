@@ -4,3 +4,4 @@ export const getAllPlayersExcept = `
 	SELECT name, id
 	FROM player
 	WHERE is_deleted = false AND NOT id = $1::int`
+export const addGame = 'INSERT INTO game VALUES ($1::int, $2::int, $3::int, $4::int)'

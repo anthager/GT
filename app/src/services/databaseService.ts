@@ -10,13 +10,6 @@ export async function addPlayer(player: Player): Promise<any> {
 	return res
 }
 
-export async function getPlayer(name: string): Promise<Player> {
-	const client = await getConnection()
-	const res = (await client.query(queries.getPlayerWithName, [name])).rows[0]
-	client.end()
-	return res
-}
-
 export async function getConnection(): Promise<Client> {
 	const client = new Client({
 		user: dbUser,
@@ -26,9 +19,27 @@ export async function getConnection(): Promise<Client> {
 	return client
 }
 
-export async function getAllPlayersExcept(id: number): Promise<Player[]> {
+export async function getPlayer(player: Player): Promise<Player> {
 	const client = await getConnection()
-	const players: Player[] = (await client.query(queries.getAllPlayersExcept, [id])).rows
+	const res = (await client.query(queries.getPlayerWithName, [player.name])).rows[0]
+	client.end()
+	return res
+}
+
+export async function getAllPlayersExcept(player: Player): Promise<Player[]> {
+	const client = await getConnection()
+	const players: Player[] = (await client.query(queries.getAllPlayersExcept, [player.id])).rows
 	client.end()
 	return players
+}
+
+export async function addGameToDB(
+	winner: Player,
+	loser: Player,
+	submitter: Player,
+	amount: number,
+): Promise<void> {
+	const client = await getConnection()
+	await client.query(queries.addGame, [winner.id, loser.id, submitter.id, amount])
+	client.end()
 }

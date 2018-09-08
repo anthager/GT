@@ -5,7 +5,7 @@ import 'chai-http'
 import { app } from '../../app'
 import * as testUtils from '../../utils/testUtils'
 import { Player } from '../../models/interfaces'
-import { getAllPlayers } from '.'
+import { getAllPlayers } from './players'
 
 declare global {
 	namespace Express {
@@ -21,7 +21,7 @@ describe('testing the fetching of all players', () => {
 	before(testUtils.before)
 	after(testUtils.after)
 	it('should get all players', async () => {
-		const player = { name: 'Petter', password: 'password', id: 13415 }
+		const player = { name: 'Nicke_test', password: 'password', id: 2 }
 		const players = await getAllPlayers(player)
 		expect(players).to.be.a('array').that.is.not.empty
 		expect(players[0])

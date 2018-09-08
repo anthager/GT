@@ -15,14 +15,16 @@ router.post('/register', ...validateRegisterInput, async (req: Request, res: Res
 	player.password = await hash(player.password, saltRounds)
 	try {
 		await addPlayer(player)
-		player = await getPlayer(player.name)
+		player = await getPlayer(player)
 		delete player.password
 		sign({ player: player }, secretKey, (err: Error, token: string) => {
 			if (err) {
 				logger.log({ level: 'error', message: `failed to generate token for ${player.name}` })
 				res.status(500).json()
+			} else {
+				logger.log({ level: 'info', message: `registered ${player.name}` })
+				res.status(200).json(token)
 			}
-			res.status(200).json(token)
 		})
 	} catch (err) {
 		switch (err.code) {
@@ -42,17 +44,23 @@ router.post('/register', ...validateRegisterInput, async (req: Request, res: Res
 	}
 })
 router.post('/login', ...validateLoginInput, async (req: Request, res: Response) => {
-	let player = await getPlayer(req.player.name)
+	let player = await getPlayer(req.player)
 	if (await compare(req.player.password, player.password)) {
 		delete player.password
 		sign({ player: player }, secretKey, (err: Error, token: string) => {
 			if (err) {
 				logger.log({ level: 'error', message: `failed to generate token for ${player.name}` })
 				res.status(500).json()
+			} else {
+				logger.log({ level: 'info', message: `logged in ${player.name}` })
+				res.status(200).json(token)
 			}
-			res.status(200).json(token)
 		})
 	} else {
+		logger.log({
+			level: 'info',
+			message: `failed to login, ${player.name}: wrong password or username`,
+		})
 		res.status(400).json('wrong username or password')
 	}
 })

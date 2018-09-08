@@ -1,10 +1,10 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
 import { secretKey } from '../config'
 import { Player, isPlayer } from '../models/interfaces'
 import { logger } from '../utils/logger'
 
-export function validateToken(req: Request, res: Response, next: any) {
+export function validateToken(req: Request, res: Response, next: NextFunction) {
 	if (!req.headers.authorization || !req.headers.authorization.split(' ')[1]) {
 		return res.status(403).json('no token provided')
 	}
@@ -16,14 +16,13 @@ export function validateToken(req: Request, res: Response, next: any) {
 				if (isPlayer(decoded.player)) {
 					req.player = decoded.player
 					logger.log({ level: 'info', message: `authenticated ${req.player.name}` })
-					next()
+					return next()
 				}
 			}
 		}
 		logger.log({
 			level: 'warn',
 			message: `failed to authenticate. decoded: ${decoded}
-		
 			error: ${err}`,
 		})
 		// to be able to run tests without having to make a login call
@@ -31,6 +30,6 @@ export function validateToken(req: Request, res: Response, next: any) {
 			req.player = { name: 'anthager', id: 1, password: '' }
 			return next()
 		}
-		return res.status(400).json('Failed to authenticate token')
+		return res.status(401).json('Failed to authenticate token')
 	})
 }
