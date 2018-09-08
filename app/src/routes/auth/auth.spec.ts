@@ -147,4 +147,17 @@ describe('testing auth', () => {
 				expect(res.status).to.equal(401)
 			})
 	})
+	it('should fail to auth with edited token', async () => {
+		const token =
+			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF5ZXIiOnsibmFtZSI6ImFudGhhZ2VyIiwiaWQiOjV9LCJpYXQiOjE1MzYzNjg0MTZ9.Yx4ibpq_yXgICxV0-W-H1tIkcYZl11JvrB3kVAqcPS4'
+		await newchai
+			.request(app)
+			.get('/restricted/players')
+			.set({
+				authorization: `Bearer ${token}`,
+			})
+			.then(res => {
+				expect(res.status).to.equal(401)
+			})
+	})
 })

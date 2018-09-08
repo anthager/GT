@@ -56,6 +56,23 @@ describe('testing adding a post', () => {
 					.that.is.not.empty.that.is.eql('invalid opponent')
 			})
 	})
+	it('should fail validation due to opponent missing', async () => {
+		const amount = 100
+		const token = 'InsaneHackerToken'
+		await newchai
+			.request(app)
+			.post('/restricted/games/new')
+			.set({
+				authorization: `Bearer ${token}`,
+			})
+			.send({ amount })
+			.then(res => {
+				expect(res.status).to.equal(400)
+				expect(res.body[0].msg)
+					.to.be.an('string')
+					.that.is.not.empty.that.is.eql('invalid opponent')
+			})
+	})
 	it('should fail validation due to amount is missing ', async () => {
 		const opponent: Partial<Player> = { name: 'Nina_test', id: 3 }
 		const token = 'InsaneHackerToken'
