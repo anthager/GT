@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express'
-import * as db from '../../services/databaseService'
-import { Player } from '../../models/interfaces'
-import { logger } from '../../utils/logger'
-import { validatePostBody } from '../../middleware/validateRequest'
+import * as db from '../../../services/databaseService'
+import { Player } from '../../../models/interfaces'
+import { logger } from '../../../utils/logger'
+import { validatePostBody } from '../../../middleware/validateRequest'
 
 export const router = Router()
 

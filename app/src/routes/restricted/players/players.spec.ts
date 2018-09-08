@@ -2,9 +2,9 @@ import { describe, it } from 'mocha'
 import * as chai from 'chai'
 import { expect } from 'chai'
 import 'chai-http'
-import { app } from '../../app'
-import * as testUtils from '../../utils/testUtils'
-import { Player } from '../../models/interfaces'
+import { app } from '../../../app'
+import * as testUtils from '../../../utils/testUtils'
+import { Player } from '../../../models/interfaces'
 import { getAllPlayers } from './players'
 
 declare global {

@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express'
-import * as players from './players'
-import * as games from './games'
+import * as players from './players/players'
+import * as games from './games/games'
 
 export const router = Router()
 
