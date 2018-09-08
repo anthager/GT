@@ -1,36 +1,25 @@
-# GurschTracker 
+# GurschTracker
 
 available routes:
 
-`api/`
+`/`
 to confirm that the api is working
 
-`api/user`
-to create a new user
+`auth/register`
+to register
 example:
-`post: {
-	"username": "anthage",
-	"email": "anton@kul.tips"
-}`
+`post: { "name": "anthage", "password": "password" }`
 
-`api/users`
-to get all users
-
-`/api/session`
-to add a session
+`auth/login`
+to login
 example:
-`post: {
-	"sender": "anthage",
-	"opponent": "simkarr",
-	"amount": 12
-}`
+`post: { "name": "anthage", "password": "password" }`
 
-`api/auth/:username`
-to check if a user with username exist
+`/restricted/players`
+to get all players
 example:
-`get: api/auth/anthage`
 
-`api/debts/:username/:from?/:to?`
-to get all debts for a user from a date to a date, if not to or from is provided, all debts from the begining of time to this day will be fetched
-example:
-`get: api/debts/anthage`
+`restricted/games/new`
+to add a new game
+Example:
+`post: { "opponent"{ "name": "anthage", "password": "password" }, "amount": 20 }`
