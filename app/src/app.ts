@@ -13,7 +13,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(router)
-
 const PORT = 1337
 // for testin
 if (process.env.NODE_ENV !== 'test') {

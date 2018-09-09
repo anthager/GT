@@ -44,23 +44,27 @@ router.post('/register', ...validateRegisterInput, async (req: Request, res: Res
 	}
 })
 router.post('/login', ...validateLoginInput, async (req: Request, res: Response) => {
-	let player = await getPlayer(req.player)
-	if (await compare(req.player.password, player.password)) {
+	let player = await getPlayer(req.player).catch(err => {
+		logger.log({ message: `an error has occured ${err}`, level: 'error' })
+	})
+	if (player && (await compare(req.player.password, player.password))) {
 		delete player.password
 		sign({ player: player }, secretKey, (err: Error, token: string) => {
+			// dont know why player suddenly is Player | undefiend
+			player = player as Player
 			if (err) {
 				logger.log({ level: 'error', message: `failed to generate token for ${player.name}` })
-				res.status(500).json()
+				return res.status(500).json()
 			} else {
 				logger.log({ level: 'info', message: `logged in ${player.name}` })
-				res.status(200).json(token)
+				return res.status(200).json(token)
 			}
 		})
 	} else {
 		logger.log({
 			level: 'info',
-			message: `failed to login, ${player.name}: wrong password or username`,
+			message: `failed to login, ${req.player.name}: wrong password or username`,
 		})
-		res.status(400).json('wrong username or password')
+		return res.status(400).json('wrong username or password')
 	}
 })

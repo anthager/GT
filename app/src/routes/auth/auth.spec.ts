@@ -114,6 +114,19 @@ describe('testing auth', () => {
 				done()
 			})
 	})
+	it('should fail to log in a player due to player doesnt exist', done => {
+		const player = { name: 'Lars_test', password: 'passworaa' }
+		newchai
+			.request(app)
+			.post('/auth/login')
+			.send(player)
+			.end((err, res) => {
+				expect(res.status).to.equal(400)
+				expect(res.body).to.be.a('string').that.is.not.empty
+				expect(res.body).to.be.equal('wrong username or password')
+				done()
+			})
+	})
 	it('should register Karl and send a request to a restricted endpoint', async () => {
 		const player = { name: 'Karl', password: 'password', id: 13418 }
 		const token = await newchai

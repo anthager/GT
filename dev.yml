@@ -2,6 +2,7 @@ version: "3"
 services:
   db:
     image: postgres
+    restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
@@ -11,7 +12,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: torsk
   app:
-    image: antonhager/gt_backend:latest
+    image: antonhager/gt_backend:dev
+    restart: always
     build:
       context: ./app
       dockerfile: Dockerfile
@@ -20,23 +22,25 @@ services:
     depends_on:
       - db
     environment:
-      NODE_ENV: dev
+      NODE_ENV: ${ENVIRONMENT:-production}
       PGPASSWORD: postgres
       PGUSER: postgres
       PGDB: torsk
       PGHOST: db
     command: ["npm", "start"]
   proxy:
-    image: antonhager/gt_proxy:latest
+    image: antonhager/gt_proxy:dev
+    restart: always
     build:
       context: ./proxy
       dockerfile: Dockerfile
       args:
-        CONF_PATH: $CONF_PATH:-./proxy/prod.conf
+        CONF_PATH: ${CONF_PATH:-./proxy/prod.conf}
     depends_on:
       - app
     ports:
       - "${PORT:-80}:80"
+      - "443:443"
     networks:
       - webnet
     command: ["nginx", "-g", "daemon off;"]

@@ -6,6 +6,7 @@ import { logger } from '../utils/logger'
 
 export function validateToken(req: Request, res: Response, next: NextFunction) {
 	if (!req.headers.authorization || !req.headers.authorization.split(' ')[1]) {
+		logger.warn(`an attempt to connect to a restricted route without a token detected`)
 		return res.status(403).json('no token provided')
 	}
 	const token = req.headers.authorization.split(' ')[1]
@@ -20,11 +21,10 @@ export function validateToken(req: Request, res: Response, next: NextFunction) {
 				}
 			}
 		}
-		logger.log({
-			level: 'warn',
-			message: `failed to authenticate. decoded: ${decoded}
+		logger.warn(
+			`failed to authenticate. decoded: ${decoded}
 			error: ${err}`,
-		})
+		)
 		// to be able to run tests without having to make a login call
 		if (process.env.NODE_ENV === 'test' && token === 'InsaneHackerToken') {
 			req.player = { name: 'anthager', id: 1, password: '' }
