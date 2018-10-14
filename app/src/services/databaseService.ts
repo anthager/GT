@@ -56,9 +56,18 @@ export async function getAllOpponents(player: Player): Promise<Opponent[]> {
 	client.end()
 	return opponents
 }
+
 export async function getTotalSum(player: Player): Promise<number> {
 	const client = await getConnection()
 	const res = Number((await client.query(queries.getTotalSum, [player.id])).rows[0].sum || 0)
 	client.end()
 	return res
+}
+
+export async function createDatabase() {
+	const client = new Client({ user: dbUser, database: dbName })
+	await client.connect()
+	await client.query(queries.createTablePlayer)
+	await client.query(queries.createTableGame)
+	await client.end()
 }

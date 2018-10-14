@@ -39,3 +39,34 @@ FROM
     (SELECT -amount as amount
     FROM game
     WHERE loser = $1::int)) as agg`
+export const createTableGame = `
+create table game (
+    Winner integer not null, 
+    Loser integer not null, 
+    Submitter integer not null, 
+    Amount integer not null, 
+    time_submitted TIMESTAMP default now(),
+    id serial, 
+    foreign key (Winner) 
+        references player(id) 
+        on delete cascade, 
+    foreign key (Loser) 
+        references player(id) 
+        on delete cascade, 
+    foreign key (Submitter) 
+        references player(id) 
+        on delete cascade, 
+    primary key (id), 
+    UNIQUE (id)
+)`
+export const createTablePlayer = `
+create table player (
+    name varchar not null, 
+    password varchar not null, 
+    Is_Deleted boolean default false, 
+    time_registerd TIMESTAMP default now(),
+    id serial, 
+    primary key (id), 
+    UNIQUE (name), 
+    UNIQUE (id)
+)`
