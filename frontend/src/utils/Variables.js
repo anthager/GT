@@ -1,1 +1,1 @@
-export const api = 'http://app'
+export const API = '/api'

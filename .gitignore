@@ -44,6 +44,7 @@ prod.js
 dist/
 secrets.ts
 debug.log
+secrets/
 
 # Misc
 misc/

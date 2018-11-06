@@ -6,7 +6,7 @@ import Axios from 'axios'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { api } from '../../utils/Variables'
+import { API } from '../../utils/Variables'
 const LoginButton = styled(Button)``
 
 const AuthInput = styled(Input)``
@@ -41,7 +41,7 @@ export default class Register extends Component {
     if (this.state.password === this.state.password2) {
       let res
       try {
-        res = await Axios.post(`${api}/auth/register`, {
+        res = await Axios.post(`${API}/auth/register`, {
           name: this.state.name,
           password: this.state.password,
         })
@@ -67,7 +67,7 @@ export default class Register extends Component {
         <FailedLabel failed={this.state.failed}>Re-enter Password:</FailedLabel>
         <AuthInput type="Password" name="password2" onChange={this.handleChange} />
         <LoginButton>Register</LoginButton>
-        <RegisterLink to={`auth/login/`}>Already a user?</RegisterLink>
+        <RegisterLink to={`/auth/login/`}>Already a user?</RegisterLink>
       </Form>
     )
   }

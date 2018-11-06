@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import List from './opponentsList/OpponentsList'
 import Axios from 'axios'
 import Header from '../Header'
-import { api } from '../utils/Variables'
+import { API } from '../utils/Variables'
 
 const Container = styled.div`
   margin: 10px;
@@ -35,7 +35,7 @@ export default class Home extends Component {
   async getOpponents() {
     const jwt = localStorage.getItem('jwt')
     try {
-      const res = await Axios.get(`${api}/restricted/players/opponents`, {
+      const res = await Axios.get(`${API}/restricted/players/opponents`, {
         headers: { Authorization: `Bearer ${jwt}` },
       })
       const opponents = res.data.map(opponent => ({
@@ -53,7 +53,7 @@ export default class Home extends Component {
   async getPlayers() {
     const jwt = localStorage.getItem('jwt')
     try {
-      const res = await Axios.get(`${api}/restricted/players/all`, {
+      const res = await Axios.get(`${API}/restricted/players/all`, {
         headers: { Authorization: `Bearer ${jwt}` },
       })
       this.setState({ players: res.data })
@@ -66,7 +66,7 @@ export default class Home extends Component {
     const jwt = localStorage.getItem('jwt')
     try {
       await Axios.post(
-        `${api}restricted/games/new`,
+        `restricted/games/new`,
         {
           opponent: { name: opponentName },
           amount: amount,

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: antonhager/gt_client:dev
+          image: antonhager/gt_client:2
           ports:
             - containerPort: 80
               name: client

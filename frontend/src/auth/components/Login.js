@@ -6,7 +6,7 @@ import Axios from 'axios'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { api } from '../../utils/Variables'
+import { API } from '../../utils/Variables'
 const LoginButton = styled(Button)``
 
 const AuthInput = styled(Input)``
@@ -36,7 +36,7 @@ export default class Login extends Component {
     event.preventDefault()
     let res
     try {
-      res = await Axios.post(`${api}/auth/login`, {
+      res = await Axios.post(`${API}/auth/login`, {
         name: this.state.name,
         password: this.state.password,
       })
@@ -51,16 +51,14 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>
-        <Form onSubmit={this.handleSubmit}>
-          <label>Username:</label>
-          <AuthInput type="text" name="name" onChange={this.handleChange} />
-          <label>Password:</label>
-          <AuthInput type="Password" name="password" onChange={this.handleChange} />
-          <LoginButton>Login</LoginButton>
-          <RegisterLink to={`/auth/register/`}>Not a user yet?</RegisterLink>
-        </Form>
-      </div>
+      <Form onSubmit={this.handleSubmit}>
+        <label>Username:</label>
+        <AuthInput type="text" name="name" onChange={this.handleChange} />
+        <label>Password:</label>
+        <AuthInput type="Password" name="password" onChange={this.handleChange} />
+        <LoginButton>Login</LoginButton>
+        <RegisterLink to={`/auth/register/`}>Not a user yet?</RegisterLink>
+      </Form>
     )
   }
 }
