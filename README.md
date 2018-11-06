@@ -1,6 +1,6 @@
 # GurschTracker
 
-available routes:
+available routes in backend-app:
 
 `/`
 to confirm that the api is working

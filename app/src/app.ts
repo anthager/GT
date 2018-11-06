@@ -14,7 +14,8 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(router)
+app.get('/', (req, res) => res.json('hehe'))
+app.use('/api', router)
 const PORT = 1337
 
 function createDatabase() {

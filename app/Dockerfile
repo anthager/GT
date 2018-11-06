@@ -5,4 +5,4 @@ RUN npm install
 COPY . ./
 RUN npm run build-ts
 EXPOSE 1337
-CMD npm start
+CMD ["npm", "start"]

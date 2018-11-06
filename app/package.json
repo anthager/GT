@@ -6,7 +6,7 @@
 	"scripts": {
 		"start-dev": "NODE_ENV=dev concurrently -k \"npm run watch-ts\" \"npm run serve-debug\"",
 		"test-dev": "NODE_ENV=test nodemon --config nodemon-test.json",
-		"start": "node dist/app.js",
+		"start": "NODE_ENV=production node dist/app.js",
 		"deploy": "",
 		"build-ts": "tsc",
 		"watch-ts": "tsc -w",
