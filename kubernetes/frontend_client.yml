@@ -1,0 +1,35 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: frontend-client
+spec:
+  selector:
+    matchLabels:
+      app: frontend-client
+      tier: frontend
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: frontend-client
+        tier: frontend
+    spec:
+      containers:
+        - name: frontend-client
+          image: antonhager/gt_frontend_client:dev
+          ports:
+            - containerPort: 80
+              name: frontend-client
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-client
+spec:
+  selector:
+    app: frontend-client
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: frontend-client
+  type: NodePort
