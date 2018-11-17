@@ -7,7 +7,7 @@ import { Player } from './models/interfaces'
 import * as db from './services/databaseService'
 
 export const app = express()
-const reconnedIntervall = 3000
+const reconnectIntervall = 3000
 
 app.options('*', cors())
 app.use(cors())
@@ -26,10 +26,11 @@ function createDatabase() {
 			logger.info('attempting to connect to database...')
 			await db.getAllPlayersExcept(player)
 			logger.info('connected to database successfully')
+			clearInterval(interval)
 		} catch (err) {
 			if (err.code === 'ECONNREFUSED') {
 				logger.warn(
-					`connecting to database failed, attempting to reconnect in ${reconnedIntervall}ms...`,
+					`connecting to database failed, attempting to reconnect in ${reconnectIntervall}ms...`,
 				)
 				success = false
 				// await db.createDatabase()
@@ -42,14 +43,15 @@ function createDatabase() {
 				logger.error(`unknow error: ${err}`)
 				success = false
 				logger.warn(
-					`connecting to database failed, attempting to reconnect in ${reconnedIntervall}ms...`,
+					`connecting to database failed, attempting to reconnect in ${reconnectIntervall}ms...`,
 				)
 			}
+		} finally {
+			if (success) {
+				clearInterval(interval)
+			}
 		}
-		if (success) {
-			clearInterval(interval)
-		}
-	}, reconnedIntervall)
+	}, reconnectIntervall)
 }
 // for testin
 if (process.env.NODE_ENV !== 'test') {
