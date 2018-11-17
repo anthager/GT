@@ -16,7 +16,12 @@ spec:
     spec:
       containers:
         - name: backend-app
-          image: antonhager/gt_backend:dev
+          image: antonhager/gt_backend_app:0.1
+          resources:
+            limits:
+              cpu: 150m
+            requests:
+              cpu: 100m
           ports:
             - containerPort: 1337
               name: backend-app
@@ -37,6 +42,11 @@ spec:
                   key: password
         - name: cloudsql-proxy
           image: gcr.io/cloudsql-docker/gce-proxy:1.11
+          resources:
+            limits:
+              cpu: 150m
+            requests:
+              cpu: 100m
           command:
             [
               "/cloud_sql_proxy",
@@ -66,4 +76,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: backend-app
-  type: ClusterIP
+  type: NodePort
