@@ -6,6 +6,7 @@ import { app } from '../../../app'
 import * as testUtils from '../../../utils/testUtils'
 import { Player } from '../../../models/interfaces'
 import { getAllPlayers } from '../players/players'
+import { BASEURL } from '../../../utils/variables'
 
 declare global {
 	namespace Express {
@@ -26,7 +27,7 @@ describe('testing adding a post', () => {
 		const token = 'InsaneHackerToken'
 		await newchai
 			.request(app)
-			.post('/restricted/games/new')
+			.post(`${BASEURL}/restricted/games/new`)
 			.set({
 				authorization: `Bearer ${token}`,
 			})
@@ -44,7 +45,7 @@ describe('testing adding a post', () => {
 		const token = 'InsaneHackerToken'
 		await newchai
 			.request(app)
-			.post('/restricted/games/new')
+			.post(`${BASEURL}/restricted/games/new`)
 			.set({
 				authorization: `Bearer ${token}`,
 			})
@@ -61,7 +62,7 @@ describe('testing adding a post', () => {
 		const token = 'InsaneHackerToken'
 		await newchai
 			.request(app)
-			.post('/restricted/games/new')
+			.post(`${BASEURL}/restricted/games/new`)
 			.set({
 				authorization: `Bearer ${token}`,
 			})
@@ -78,7 +79,7 @@ describe('testing adding a post', () => {
 		const token = 'InsaneHackerToken'
 		await newchai
 			.request(app)
-			.post('/restricted/games/new')
+			.post(`${BASEURL}/restricted/games/new`)
 			.set({
 				authorization: `Bearer ${token}`,
 			})
@@ -96,7 +97,7 @@ describe('testing adding a post', () => {
 		const token = 'InsaneHackerToken'
 		await newchai
 			.request(app)
-			.post('/restricted/games/new')
+			.post(`${BASEURL}/restricted/games/new`)
 			.set({
 				authorization: `Bearer ${token}`,
 			})

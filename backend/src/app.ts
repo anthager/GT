@@ -5,6 +5,7 @@ import { logger } from './utils/logger'
 import { router } from './routes'
 import { Player } from './models/interfaces'
 import * as db from './services/databaseService'
+import morgan = require('morgan')
 
 export const app = express()
 const reconnectIntervall = 3000
@@ -33,7 +34,6 @@ function createDatabase() {
 					`connecting to database failed, attempting to reconnect in ${reconnectIntervall}ms...`,
 				)
 				success = false
-				// await db.createDatabase()
 			} else if (err.code === '42P01') {
 				logger.warn('connecting to database successfully, but tables not found, creating...')
 				let success = true
@@ -55,6 +55,7 @@ function createDatabase() {
 }
 // for testin
 if (process.env.NODE_ENV !== 'test') {
+	app.use(morgan('common'))
 	createDatabase()
 	app.listen(PORT, () => {
 		logger.info(`started in ${process.env.NODE_ENV} mode at ${PORT}`)

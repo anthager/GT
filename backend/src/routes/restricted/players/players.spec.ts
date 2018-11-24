@@ -6,6 +6,7 @@ import { app } from '../../../app'
 import * as testUtils from '../../../utils/testUtils'
 import { Player } from '../../../models/interfaces'
 import { getAllPlayers, getAllOpponents, getTotal } from './players'
+import { BASEURL } from '../../../utils/variables'
 
 declare global {
 	namespace Express {
@@ -17,6 +18,16 @@ declare global {
 
 const newchai = chai.use(require('chai-http'))
 
+describe('testing sending a request to the server', () => {
+	it('should get a http 200 back for the request', async () => {
+		await newchai
+			.request(app)
+			.get('/')
+			.then(res => {
+				expect(res.status).to.equal(200)
+			})
+	})
+})
 describe('testing the fetching of all players', () => {
 	before(testUtils.before)
 	after(testUtils.after)
@@ -32,7 +43,7 @@ describe('testing the fetching of all players', () => {
 		const token = 'InsaneHackerToken'
 		await newchai
 			.request(app)
-			.get('/restricted/players/all')
+			.get(`${BASEURL}/restricted/players/all`)
 			.set({
 				authorization: `Bearer ${token}`,
 			})
@@ -62,7 +73,7 @@ describe('testing the fetching of all opponents', () => {
 		const token = 'InsaneHackerToken'
 		await newchai
 			.request(app)
-			.get('/restricted/players/opponents')
+			.get(`${BASEURL}/restricted/players/opponents`)
 			.set({
 				authorization: `Bearer ${token}`,
 			})
@@ -90,7 +101,7 @@ describe('testing fetching of total', () => {
 		const token = 'InsaneHackerToken'
 		await newchai
 			.request(app)
-			.get('/restricted/players/total')
+			.get(`${BASEURL}/restricted/players/total`)
 			.set({
 				authorization: `Bearer ${token}`,
 			})
