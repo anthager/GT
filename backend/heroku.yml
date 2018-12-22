@@ -1,3 +1,0 @@
-build:
-  docker:
-    gt_backend_app: Dockerfile
