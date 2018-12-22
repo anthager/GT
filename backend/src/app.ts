@@ -17,12 +17,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => res.json('hehe'))
 app.use('/api', router)
-const PORT = 1337
+const PORT = process.env.PORT || 1337
 
 function createDatabase() {
 	let success = true
 	const interval = setInterval(async () => {
 		try {
+			console.log(process.env.PORT)
 			const player: Player = { name: 'Anton', password: '', id: 0 }
 			logger.info('attempting to connect to database...')
 			await db.getAllPlayersExcept(player)
