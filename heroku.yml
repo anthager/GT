@@ -1,4 +1,4 @@
 build:
   docker:
     web: frontend/Dockerfile
-    gt_backend_app: backend/Dockerfile
+    api: backend/Dockerfile
