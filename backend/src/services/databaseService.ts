@@ -12,8 +12,7 @@ export async function addPlayer(player: Player): Promise<any> {
 
 export async function getConnection(): Promise<Client> {
 	const client = new Client({
-		user: dbUser,
-		database: dbName,
+		connectionString: process.env.DATABASE_URL
 	})
 	await client.connect()
 	return client
