@@ -23,7 +23,6 @@ function createDatabase() {
 	let success = true
 	const interval = setInterval(async () => {
 		try {
-			console.log(process.env.PORT)
 			const player: Player = { name: 'Anton', password: '', id: 0 }
 			logger.info('attempting to connect to database...')
 			await db.getAllPlayersExcept(player)
