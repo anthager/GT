@@ -14,4 +14,4 @@ RUN rm -rf /etc/nginx/conf.d
 COPY server/prod.conf /etc/nginx/nginx.conf
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/nginx.conf && nginx -g 'daemon off;'
