@@ -12,7 +12,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: gursch
   backend-app:
-    image: antonhager/gt_backend_app:0.1.1
+    image: antonhager/gt_backend_app:0.1.2
     restart: always
     ports:
       - '1111:1337'
