@@ -7,14 +7,16 @@ metadata:
   labels:
     app: gt
 spec:
+  tls:
+  - secretName: sslcerts
   rules:
     - http:
         paths:
-          - path: /*
-            backend:
-              serviceName: frontend-client
-              servicePort: 80
           - path: /api/*
             backend:
               serviceName: backend-app
+              servicePort: 80
+          - path: /*
+            backend:
+              serviceName: frontend-client
               servicePort: 80

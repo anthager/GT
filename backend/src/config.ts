@@ -12,7 +12,7 @@ function getDBName(): string {
 			return 'gursch'
 		}
 		case 'production': {
-			return process.env.PGDATABASE as string
+			return process.env.PGDB as string
 		}
 	}
 	return ''

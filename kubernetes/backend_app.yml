@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-app
-          image: antonhager/gt_backend_app:0.1
+          image: antonhager/gt_backend_app:0.1.6
           resources:
             limits:
               cpu: 150m
@@ -26,10 +26,12 @@ spec:
             - containerPort: 1337
               name: backend-app
           env:
-            - name: POSTGRES_DB_HOST
-              value: 127.0.0.1:5432
+            - name: PGHOST
+              value: "10.93.128.3"
             - name: PGDATABASE
               value: gursch
+            - name: PGPORT
+              value: "5432"
             - name: PGUSER
               valueFrom:
                 secretKeyRef:
@@ -40,30 +42,6 @@ spec:
                 secretKeyRef:
                   name: cloudsql-db-credentials
                   key: password
-        - name: cloudsql-proxy
-          image: gcr.io/cloudsql-docker/gce-proxy:1.11
-          resources:
-            limits:
-              cpu: 150m
-            requests:
-              cpu: 100m
-          command:
-            [
-              "/cloud_sql_proxy",
-              "-instances=gurschtracker-221622:europe-north1:dev=tcp:5432",
-              "-credential_file=/secrets/cloudsql/credentials.json",
-            ]
-          securityContext:
-            runAsUser: 2 # non-root user
-            allowPrivilegeEscalation: false
-          volumeMounts:
-            - name: cloudsql-instance-credentials
-              mountPath: /secrets/cloudsql
-              readOnly: true
-      volumes:
-        - name: cloudsql-instance-credentials
-          secret:
-            secretName: cloudsql-instance-credentials
 ---
 apiVersion: v1
 kind: Service

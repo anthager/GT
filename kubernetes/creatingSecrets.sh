@@ -1,0 +1,2 @@
+kubectl create secret generic sslcerts --from-file=tsl.crt=secrets/anton.pizza/fullchain.pem --from-file=tls.key=secrets/anton.pizza/privkey.pem &&
+kubectl create secret generic cloudsql-db-credentials --from-file=secrets/db/password --from-file=secrets/db/username

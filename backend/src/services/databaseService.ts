@@ -2,6 +2,7 @@ import { Player, Opponent } from '../models/interfaces'
 import { Client } from 'pg'
 import { dbName, dbUser } from '../config'
 import * as queries from './queries'
+import { logger } from '../utils/logger';
 
 export async function addPlayer(player: Player): Promise<any> {
 	const client = await getConnection()
@@ -11,10 +12,7 @@ export async function addPlayer(player: Player): Promise<any> {
 }
 
 export async function getConnection(): Promise<Client> {
-	const client = new Client({
-		user: dbUser,
-		database: dbName,
-	})
+	const client = new Client()
 	await client.connect()
 	return client
 }
@@ -65,8 +63,7 @@ export async function getTotalSum(player: Player): Promise<number> {
 }
 
 export async function createDatabase() {
-	const client = new Client({ user: dbUser, database: dbName })
-	await client.connect()
+	const client = await getConnection()
 	await client.query(queries.createTablePlayer)
 	await client.query(queries.createTableGame)
 	await client.end()

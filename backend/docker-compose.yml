@@ -12,7 +12,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: gursch
   backend-app:
-    image: antonhager/gt_backend_app:0.1.1
+    build: .
+    image: antonhager/gt_backend_app:latest
     restart: always
     ports:
       - '1111:1337'
@@ -21,11 +22,12 @@ services:
     depends_on:
       - db
     environment:
-      NODE_ENV: ${ENVIRONMENT:-production}
+      NODE_ENV: ${ENVIRONMENT:-dev}
       PGPASSWORD: postgres
       PGUSER: postgres
       PGDB: gursch
       PGHOST: db
+      PGPORT: 5432
     command: ['npm', 'start']
 networks:
   webnet:
