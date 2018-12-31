@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend-client
-          image: antonhager/gt_frontend_client:0.1.1
+          image: antonhager/gt_frontend_client:0.1.2
           resources:
             limits:
               cpu: 150m
