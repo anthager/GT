@@ -5,7 +5,7 @@
 		"trailing-comma": true,
 		"quotemark": false,
 		"triple-equals": true,
-		"arrow-parens": false
+		"arrow-parens": false,
 	},
 	"rulesDirectory": []
 }

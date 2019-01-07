@@ -1,9 +1,8 @@
 import { Client } from 'pg'
-import { dbUser, dbName } from '../config'
 import * as queries from '../services/queries'
 
 export const before = async () => {
-	const client = new Client({ user: dbUser, database: dbName })
+	const client = new Client()
 	await client.connect()
 	await client.query(queries.createTablePlayer)
 	await client.query(queries.createTableGame)
@@ -32,7 +31,7 @@ export const before = async () => {
 }
 
 export const after = async () => {
-	const client = new Client({ user: dbUser, database: dbName })
+	const client = new Client()
 	await client.connect()
 	await client.query('drop table game')
 	await client.query('drop table player')

@@ -1,8 +1,6 @@
 import { Player, Opponent } from '../models/interfaces'
 import { Client } from 'pg'
-import { dbName, dbUser } from '../config'
 import * as queries from './queries'
-import { logger } from '../utils/logger';
 
 export async function addPlayer(player: Player): Promise<any> {
 	const client = await getConnection()

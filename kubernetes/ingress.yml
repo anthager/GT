@@ -4,7 +4,6 @@ metadata:
   name: main-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: dev
-    kubernetes.io/ingress.allow-http: "false"
   labels:
     app: gt
 spec:

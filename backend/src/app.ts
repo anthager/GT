@@ -8,7 +8,7 @@ import * as db from './services/databaseService'
 import morgan = require('morgan')
 
 export const app = express()
-const reconnectIntervall = 3000
+const reconnectInterval = 3000
 
 app.options('*', cors())
 app.use(cors())
@@ -31,7 +31,7 @@ function createDatabase() {
 		} catch (err) {
 			if (err.code === 'ECONNREFUSED') {
 				logger.warn(
-					`connecting to database failed, attempting to reconnect in ${reconnectIntervall}ms...`,
+					`connecting to database failed, attempting to reconnect in ${reconnectInterval}ms...`,
 				)
 				success = false
 			} else if (err.code === '42P01') {
@@ -43,7 +43,7 @@ function createDatabase() {
 				logger.error(`unknow error: ${err}`)
 				success = false
 				logger.warn(
-					`connecting to database failed, attempting to reconnect in ${reconnectIntervall}ms...`,
+					`connecting to database failed, attempting to reconnect in ${reconnectInterval}ms...`,
 				)
 			}
 		} finally {
@@ -51,7 +51,7 @@ function createDatabase() {
 				clearInterval(interval)
 			}
 		}
-	}, reconnectIntervall)
+	}, reconnectInterval)
 }
 // for testin
 if (process.env.NODE_ENV !== 'test') {
