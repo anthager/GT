@@ -3,8 +3,6 @@ services:
   db:
     image: postgres
     restart: always
-    volumes:
-      - ./gurschdata:/var/lib/postgresql/data
     networks:
       - webnet
     environment:
@@ -12,11 +10,10 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: gursch
   backend-app:
-    build: .
-    image: antonhager/gt_backend_app:latest
-    restart: always
-    ports:
-      - '1111:1337'
+    build: 
+      dockerfile: Dockerfile-Dev
+      context: .
+    image: antonhager/gt_backend_app_test:latest
     networks:
       - webnet
     depends_on:
@@ -24,7 +21,7 @@ services:
     volumes:
       - ./src:/usr/app/src
     environment:
-      NODE_ENV: dev
+      NODE_ENV: test
       PGPASSWORD: postgres
       PGUSER: postgres
       PGDB: gursch
