@@ -66,7 +66,7 @@ export default class Home extends Component {
     const jwt = localStorage.getItem('jwt')
     try {
       await Axios.post(
-        `restricted/games/new`,
+        `${API}/restricted/games/new`,
         {
           opponent: { name: opponentName },
           amount: amount,
