@@ -1,7 +1,8 @@
 # GurschTracker
 https://gursch.anton.pizza
+If the site is not available my gcloud credits has probably run out :(
 
-available routes in backend-app:
+Available routes in backend-app:
 
 `/`
 to confirm that the api is working
