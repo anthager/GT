@@ -20,7 +20,12 @@ export default class OpponentCard extends Component {
     ) : (
       undefined
     )
-    const amount = this.props.amount ? <Amount>{this.props.amount} kr</Amount> : undefined
+    const amount = this.props.amount ? (
+      // the reason for the amount class is to be able to test if it renders or not, may not be a good way but it works for nots
+      <Amount className="amount">{this.props.amount} kr</Amount>
+    ) : (
+      undefined
+    )
     const color = this.props.amount ? colorFor.card : colorFor.searchCard
     return (
       <CardStyle

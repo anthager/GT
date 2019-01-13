@@ -20,12 +20,17 @@ export default class PlayerSearch extends Component {
     onSearch: PropTypes.func.isRequired,
     phrase: PropTypes.string.isRequired,
   }
+
+  search = val => {
+    this.props.onSearch(val.target.value)
+  }
+
   render() {
     return (
       <SearchCardStyle>
         <SearchStyled
           value={this.props.phrase}
-          onChange={event => this.props.onSearch(event.target.value)}
+          onChange={event => this.search(event)}
           placeholder={'search...'}
         />
       </SearchCardStyle>

@@ -89,7 +89,7 @@ export default class Home extends Component {
     this.setState({ content: opponents })
   }
 
-  onSearch = async phrase => {
+  onSearch = phrase => {
     this.setState({ searchPhrase: phrase })
     const opponents = this.state.opponents
     if (!phrase.length) {

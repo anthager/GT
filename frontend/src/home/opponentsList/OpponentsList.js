@@ -17,6 +17,7 @@ export default class List extends Component {
   constructor(props) {
     super(props)
     this.state = { selected: undefined }
+    this.search = this.search.bind(this)
   }
 
   handleCardClick = id => {
@@ -32,6 +33,11 @@ export default class List extends Component {
   handlePost = (opponent, amount) => {
     this.setState({ selected: undefined })
     this.props.postGame(opponent, amount)
+  }
+
+  search(phrase) {
+    this.setState({ selected: undefined })
+    this.props.onSearch(phrase)
   }
 
   renderList() {
@@ -57,7 +63,7 @@ export default class List extends Component {
     return (
       <ListStyle>
         {this.props.searchPhrase !== undefined ? (
-          <PlayerSearch onSearch={this.props.onSearch} phrase={this.props.searchPhrase} />
+          <PlayerSearch onSearch={this.search} phrase={this.props.searchPhrase} />
         ) : (
           undefined
         )}
